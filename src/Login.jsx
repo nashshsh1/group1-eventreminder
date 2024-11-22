@@ -1,34 +1,69 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from './axios';
+import api from './api';
+import './App.css';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [isInvalid, setIsInvalid] = useState(false);
+    const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await api.post('/login', { email, password });
-      localStorage.setItem('token', response.data.token);
-      console.log('Login successful:', response.data);
-      navigate('/dashboard'); // Redirect to Dashboard
-    } catch (error) {
-      setError('Login failed. Check your credentials.');
-      console.error(error.response ? error.response.data : error.message);
-    }
-  };
+    const handleSubmit = async (event) => {
+        event.preventDefault(); // Prevent page reload
+        try {
+            const response = await api.post('/login', { email, password });
 
-  return (
-    <form onSubmit={handleLogin}>
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
-      <button type="submit">Login</button>
-      {error && <p>{error}</p>}
-    </form>
-  );
+            if (response.data.token) {
+                // Store token and navigate to the next page
+                localStorage.setItem('auth_token', response.data.token);
+                navigate('/users');
+            }
+        } catch {
+            // Show error and trigger animation
+            setError('Invalid login credentials');
+            setIsInvalid(true);
+
+            // Duration of error animation
+            setTimeout(() => setIsInvalid(false), 500);
+        }
+    };
+
+    return (
+        <div className="container">
+            <div className="left-section">
+                <h1>EVENT REMINDER</h1>
+                <p>Set your day with us!</p>
+            </div>
+            <div className="right-section">
+                <h2>Login</h2>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className={isInvalid ? 'invalid' : ''}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className={isInvalid ? 'invalid' : ''}
+                    />
+                    <button
+                        type="submit"
+                        className={isInvalid ? 'invalid' : ''}
+                    >
+                        Login
+                    </button>
+                    {error && <p className="error-text">{error}</p>}
+                </form>
+            </div>
+        </div>
+    );
 };
 
 export default Login;
