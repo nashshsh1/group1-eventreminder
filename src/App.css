@@ -2,6 +2,7 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #d3d3d3;
+  transition: background-color 0.3s ease;
 }
 
 .header {
@@ -11,6 +12,7 @@ body {
   align-items: center;
   justify-content: space-between;
   border-bottom: 2px solid #d3d3d3;
+  transition: background-color 0.3s ease; 
 }
 
 .header .logo {
@@ -25,14 +27,20 @@ body {
   text-decoration: none;
   color: #000;
   font-size: 18px;
+  transition: color 0.3s ease; 
+}
+
+.header nav a:hover ;
+  color: #4a4a4a; 
 }
 
 .container {
   display: flex;
-  justify-content: space-between; /* Keep the left and right sections spaced apart */
+  justify-content: space-between;
   align-items: center;
   height: calc(100vh - 60px);
   padding: 0 20px;
+  transition: all 0.3s ease; 
 }
 
 /* Left Section */
@@ -40,28 +48,37 @@ body {
   max-width: 50%;
   display: flex; 
   flex-direction: column; 
-  align-items: center; /* Center items horizontally */
-  text-align: center; /* Center text */
-  margin-left: auto; /* Allow the left section to take up space */
-  margin-right: auto; /* Allow the left section to take up space */
+  align-items: center; 
+  text-align: center; 
+  margin-left: auto; 
+  margin-right: auto;
+  transition: transform 0.3s ease; 
 }
 
-/* Centering the headings and paragraph */
+.left-section:hover {
+  transform: scale(1.02); 
+}
+
 .left-section h1,
 .left-section p {
-  margin: 0; /* Remove default margins */
+  margin: 0;
 }
 
 .left-section h1 {
   font-size: 36px;
   color: #4a4a4a;
   margin-top: 60px;
+  transition: color 0.3s ease; 
+}
+
+.left-section h1:hover {
+  color: #333; 
 }
 
 .left-section p {
   font-size: 18px;
   color: #4a4a4a;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .right-section {
@@ -69,8 +86,14 @@ body {
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 400px; /* Width of login UI */
-  position: relative; /* To position the popup relative to this section */
+  width: 400px;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.right-section:hover {
+  transform: scale(1.02); 
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .right-section h2 {
@@ -85,6 +108,12 @@ body {
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  transition: border-color 0.3s ease, background-color 0.3s ease; 
+}
+
+.right-section input:focus {
+  border-color: #4a4a4a;
+  background-color: #f1f1f1;
 }
 
 .right-section button {
@@ -95,6 +124,11 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: transform 0.3s ease; 
+}
+
+.right-section button:hover {
+  transform: scale(1.05); 
 }
 
 .right-section a {
@@ -103,27 +137,40 @@ body {
   margin-top: 15px;
   color: #4a4a4a;
   text-decoration: none;
+  transition: color 0.3s ease; 
+}
+
+.right-section a:hover {
+  color: #333;
 }
 
 .popup {
-  position: absolute; /* Use absolute positioning */
-  top: 50%; /* Center the popup vertically */
-  left: 50%; /* Center the popup horizontally */
-  transform: translate(-50%, -50%); /* Center the popup using transform */
-  width: 400px; /* Match width of the login UI */
-  padding: 40px; /* Match the padding of the right section */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  padding: 40px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  background-color: #fff; /* Normal background */
-  z-index: 1000; /* Ensure it's on top */
-  display: flex; /* Make sure popup content is displayed properly */
-  flex-direction: column; /* Arrange popup content vertically */
-  align-items: center; /* Center align content */
-  justify-content: center; /* Center align content */
+  background-color: #fff;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards; 
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
 .popup-content {
-  width: 100%; /* Ensure it takes full width of the popup */
+  width: 100%;
 }
 
 .popup-content h2 {
@@ -133,7 +180,7 @@ body {
 }
 
 .popup-content input {
-  width: calc(100% - 30px); /* Adjust width to match input fields */
+  width: calc(100% - 30px);
   padding: 15px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
@@ -148,6 +195,11 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: transform 0.3s ease; 
+}
+
+.popup-content button:hover ;
+  transform: scale(1.05); 
 }
 
 .close-popup {
@@ -157,52 +209,6 @@ body {
   float: right;
 }
 
-/* Responsive behavior */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items */
-    text-align: center; /* Center text */
-    height: auto; /* Allow height to adjust for content */
-    padding: 20px; /* Add padding for mobile */
-  }
-
-  .left-section {
-    max-width: 100%; /* Full width on mobile */
-    margin-bottom: 40px; /* Space below */
-    padding: 0 10px; /* Adjust padding */
-  }
-
-  .right-section {
-    width: 90%; /* Make it more responsive */
-    padding: 20px; /* Adjust padding */
-    margin: 0px auto; /* Center the login section with some margin */
-    display: flex; /* Use flex to stack items */
-    flex-direction: column; /* Stack items in the right section */
-    align-items: center; /* Center align login items */
-  }
-
-  .right-section h2 {
-    font-size: 24px; /* Smaller font size for mobile */
-    margin: 0px 0; /* Space above and below */
-  }
-
-  .right-section input,
-  .right-section button {
-    padding: 10px; /* Adjust button and input padding */
-    width: 100%; /* Full width for inputs */
-  }
-
-  .popup {
-    width: 90%; /* Match the width on smaller screens */
-  }
-
-  .popup-content h2 {
-    font-size: 24px; /* Smaller font size for popups */
-  }
-}
-
-/* Logout Button */
 .logout-btn {
   background-color: #4a4a4a;
   color: white;
@@ -211,8 +217,54 @@ body {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  transition: background-color 0.3s ease; 
 }
 
 .logout-btn:hover {
-  background-color: #333;
+  background-color: #333; /*
 }
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: auto;
+    padding: 20px;
+  }
+
+  .left-section {
+    max-width: 100%;
+    margin-bottom: 40px;
+    padding: 0 10px;
+  }
+
+  .right-section {
+    width: 90%;
+    padding: 20px;
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .right-section h2 {
+    font-size: 24px;
+  }
+
+  .right-section input,
+  .right-section button {
+    padding: 10px;
+    width: 100%;
+  }
+
+  .popup {
+    width: 90%;
+  }
+
+  .popup-content h2 {
+    font-size: 24px;
+  }
+}
+
