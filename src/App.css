@@ -1,12 +1,35 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #4EDFD8;
+  background-color: #d3d3d3;
+}
+
+.header {
+  background-color: #b0b0b0;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #d3d3d3;
+}
+
+.header .logo {
+  width: 40px;
+  height: 40px;
+  background-color: #4a4a4a;
+  border-radius: 50%;
+}
+
+.header nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #000;
+  font-size: 18px;
 }
 
 .container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Keep the left and right sections spaced apart */
   align-items: center;
   height: calc(100vh - 60px);
   padding: 0 20px;
@@ -15,8 +38,18 @@ body {
 /* Left Section */
 .left-section {
   max-width: 50%;
-  text-align: center;
-  margin: auto;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; /* Center items horizontally */
+  text-align: center; /* Center text */
+  margin-left: auto; /* Allow the left section to take up space */
+  margin-right: auto; /* Allow the left section to take up space */
+}
+
+/* Centering the headings and paragraph */
+.left-section h1,
+.left-section p {
+  margin: 0; /* Remove default margins */
 }
 
 .left-section h1 {
@@ -28,22 +61,16 @@ body {
 .left-section p {
   font-size: 18px;
   color: #4a4a4a;
+  margin-bottom: 0px;
 }
 
-/* Right Section */
 .right-section {
   background-color: #fff;
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 400px;
-  position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.right-section:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  width: 400px; /* Width of login UI */
+  position: relative; /* To position the popup relative to this section */
 }
 
 .right-section h2 {
@@ -58,14 +85,6 @@ body {
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  box-sizing: border-box;
-}
-
-.right-section input:focus {
-  border-color: #4EDFD8;
-  box-shadow: 0 0 5px rgba(78, 223, 216, 0.5);
-  outline: none;
 }
 
 .right-section button {
@@ -76,57 +95,124 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.right-section button:hover {
-  background-color: #333;
-  transform: translateY(-3px);
+.right-section a {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  color: #4a4a4a;
+  text-decoration: none;
 }
 
-/* for mobile view */
+.popup {
+  position: absolute; /* Use absolute positioning */
+  top: 50%; /* Center the popup vertically */
+  left: 50%; /* Center the popup horizontally */
+  transform: translate(-50%, -50%); /* Center the popup using transform */
+  width: 400px; /* Match width of the login UI */
+  padding: 40px; /* Match the padding of the right section */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #fff; /* Normal background */
+  z-index: 1000; /* Ensure it's on top */
+  display: flex; /* Make sure popup content is displayed properly */
+  flex-direction: column; /* Arrange popup content vertically */
+  align-items: center; /* Center align content */
+  justify-content: center; /* Center align content */
+}
+
+.popup-content {
+  width: 100%; /* Ensure it takes full width of the popup */
+}
+
+.popup-content h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #4a4a4a;
+}
+
+.popup-content input {
+  width: calc(100% - 30px); /* Adjust width to match input fields */
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.popup-content button {
+  width: 100%;
+  padding: 15px;
+  background-color: #4a4a4a;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.close-popup {
+  cursor: pointer;
+  color: #4a4a4a;
+  text-decoration: underline;
+  float: right;
+}
+
+/* Responsive behavior */
 @media (max-width: 768px) {
   .container {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    height: auto;
-    padding: 20px;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items */
+    text-align: center; /* Center text */
+    height: auto; /* Allow height to adjust for content */
+    padding: 20px; /* Add padding for mobile */
   }
 
   .left-section {
-    max-width: 100%;
-    margin-bottom: 40px;
-    padding: 0 10px;
+    max-width: 100%; /* Full width on mobile */
+    margin-bottom: 40px; /* Space below */
+    padding: 0 10px; /* Adjust padding */
   }
 
   .right-section {
-    width: 90%;
-    padding: 20px;
-    margin: auto;
+    width: 90%; /* Make it more responsive */
+    padding: 20px; /* Adjust padding */
+    margin: 0px auto; /* Center the login section with some margin */
+    display: flex; /* Use flex to stack items */
+    flex-direction: column; /* Stack items in the right section */
+    align-items: center; /* Center align login items */
+  }
+
+  .right-section h2 {
+    font-size: 24px; /* Smaller font size for mobile */
+    margin: 0px 0; /* Space above and below */
   }
 
   .right-section input,
   .right-section button {
-    padding: 10px;
+    padding: 10px; /* Adjust button and input padding */
+    width: 100%; /* Full width for inputs */
+  }
+
+  .popup {
+    width: 90%; /* Match the width on smaller screens */
+  }
+
+  .popup-content h2 {
+    font-size: 24px; /* Smaller font size for popups */
   }
 }
 
-/* Shake Animation */
-@keyframes shake {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  20%, 60% {
-    transform: translateX(-10px);
-  }
-  40%, 80% {
-    transform: translateX(10px);
-  }
+/* Logout Button */
+.logout-btn {
+  background-color: #4a4a4a;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-.invalid {
-  background-color: #ff4d4d !important;
-  animation: shake 0.5s ease;
-  border: 1px solid #ff0000;
+.logout-btn:hover {
+  background-color: #333;
 }
