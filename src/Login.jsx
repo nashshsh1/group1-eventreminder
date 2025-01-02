@@ -11,21 +11,17 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
-        event.preventDefault(); // Prevent page reload
+        event.preventDefault();
         try {
             const response = await api.post('/login', { email, password });
 
             if (response.data.token) {
-                // Store token and navigate to the next page
                 localStorage.setItem('auth_token', response.data.token);
                 navigate('/users');
             }
         } catch {
-            // Show error and trigger animation
             setError('Invalid login credentials');
             setIsInvalid(true);
-
-            // Duration of error animation
             setTimeout(() => setIsInvalid(false), 500);
         }
     };
@@ -67,3 +63,6 @@ const Login = () => {
 };
 
 export default Login;
+
+
+
